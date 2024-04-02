@@ -1,0 +1,64 @@
+main{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h1{
+    color: #7EA8F8;
+    font-size: 50px;
+    text-align: center;
+}
+
+form{
+    width: 60%;
+    min-height: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    padding: 5px;
+}
+
+.input-container{
+    width: 100%;
+    display: flex;
+    gap: 5px;
+}
+
+input{
+    width: 33.3%;
+    height: 30px;
+}
+
+.add-btn{
+    width: 90px;
+    height: 30px;
+    background-color: #7EA8F8;
+    border: none;
+    color: white;
+    margin-bottom: 5px;
+}
+
+table{
+    width: 70%;
+    border: 2px solid #7EA8F8;
+    margin-bottom: 70px;
+}
+
+td, th{
+    border: 1px solid #7EA8F8;
+    padding: 5px;
+}
+
+table thead{
+    background-color: #7EA8F8;
+}
+
+tr{
+    text-align: center;
+}
