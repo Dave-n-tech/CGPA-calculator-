@@ -8,18 +8,22 @@ main{
 
 h1{
     color: #7EA8F8;
-    font-size: 40px;
+    font-size: 30px;
     text-align: center;
+}
+
+span{
+    font-size: 13px;
 }
 
 h2{
     color: #7EA8F8;
-    font-size: 30px;
+    font-size: 40px;
     margin: 0;
 }
 
 form{
-    width: 60%;
+    width: 70%;
     min-height: 70px;
     display: flex;
     flex-direction: column;
@@ -39,6 +43,9 @@ form{
 input{
     width: 33.3%;
     height: 30px;
+    background-color: rgb(231, 233, 235);
+    border: none;
+    padding:5px 15px;
 }
 
 .add-btn{
@@ -67,4 +74,22 @@ table thead{
 
 tr{
     text-align: center;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .input-container{
+        flex-direction: column;
+        gap: 10px;
+    }
+    input{
+        width: 100%;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: white;
+        color: black;
+    }
 }

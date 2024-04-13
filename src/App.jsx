@@ -120,8 +120,7 @@ function App() {
 
     CgpaRef.current.value = "";
     semestersRef.current.value = "";
-    
-    console.log(cumulativeGradePointAverage);
+
   };
 
   return (
@@ -134,6 +133,7 @@ function App() {
           setCurrentGP={setCurrentGP}
           setNumberOfSemesters={setNumberOfSemesters}
         />
+        <span>Fresh student? Enter 0 for both</span>
         <h2> Enter Grades</h2>
         <div className="input-container">
           <input
