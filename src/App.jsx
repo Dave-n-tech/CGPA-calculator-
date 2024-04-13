@@ -4,14 +4,22 @@ import { useReducer, useRef } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import GradeList from "./GradeList";
+import CurrentGrade from "./CurrentGrade";
 
 function App() {
   const courseRef = useRef();
   const unitRef = useRef();
   const scoreRef = useRef();
+  const CgpaRef = useRef();
+  const semestersRef = useRef();
   const [totalUnit, setTotalUnit] = useState(0);
   const [totalPoint, setTotalPoint] = useState(0);
   const [gradePoint, setGradePoint] = useState(0);
+  const [currentGP, setCurrentGP] = useState(0);
+  const [numberOfSemesters, setNumberOfSemesters] = useState(0);
+  const [cumulativeGradePoint, setCumulativeGradePoint] = useState(0)
+
+  // console.log(currentGP, numberOfSemesters)
 
   const [gradeInput, setGradeInput] = useState({
     course: "",
@@ -29,7 +37,6 @@ function App() {
   const INITIAL_STATE = getLocalGrades();
 
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
-
 
   useEffect(() => {
     localStorage.setItem("GRADES", JSON.stringify(state));
@@ -87,6 +94,7 @@ function App() {
     courseRef.current.value = "";
     unitRef.current.value = "";
     scoreRef.current.value = "";
+    
   };
 
   const handleDeleteGrade = (id) => {
@@ -99,14 +107,34 @@ function App() {
     if (state.length === 0) {
       return;
     }
-    const cgpa = totalPoint / totalUnit;
-    setGradePoint(cgpa.toFixed(2));
+    const gpa = totalPoint / totalUnit;
+    setGradePoint(gpa.toFixed(2));
+
+    // calculating cumulative grade point average
+    const initialSumOfGradePoints = currentGP * numberOfSemesters;
+    const newSumOfGradePoints = initialSumOfGradePoints + gpa;
+
+    const newNumberOfSemesters = parseInt(numberOfSemesters)
+    const cumulativeGradePointAverage = newSumOfGradePoints / (newNumberOfSemesters + 1);
+    setCumulativeGradePoint(cumulativeGradePointAverage.toFixed(2));
+
+    CgpaRef.current.value = "";
+    semestersRef.current.value = "";
+    
+    console.log(cumulativeGradePointAverage);
   };
 
   return (
     <main>
-      <h1>CGPA calculator</h1>
+      <h1>LASU CGPA calculator</h1>
       <form onSubmit={handleAddGrade}>
+        <CurrentGrade
+          CgpaRef={CgpaRef}
+          semestersRef={semestersRef}
+          setCurrentGP={setCurrentGP}
+          setNumberOfSemesters={setNumberOfSemesters}
+        />
+        <h2> Enter Grades</h2>
         <div className="input-container">
           <input
             ref={courseRef}
@@ -168,17 +196,23 @@ function App() {
           )}
 
           <tr>
-            <td colSpan="4">GPA: {gradePoint != 0 ? gradePoint : ""}</td>
+            <td colSpan="4">GP: {gradePoint != 0 ? gradePoint : ""}</td>
             <td
               style={{
                 cursor: "pointer",
                 backgroundColor: "#7EA8F8",
                 color: "white",
+                fontWeight: 600
               }}
               onClick={handleCalculateCgpa}
               className="button"
             >
               calculate
+            </td>
+          </tr>
+          <tr>
+            <td colSpan="5">
+              CGPA: {cumulativeGradePoint != 0 ? cumulativeGradePoint : ""}
             </td>
           </tr>
         </tbody>
