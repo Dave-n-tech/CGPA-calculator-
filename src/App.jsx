@@ -18,6 +18,7 @@ function App() {
   const [currentGP, setCurrentGP] = useState(0);
   const [numberOfSemesters, setNumberOfSemesters] = useState(0);
   const [cumulativeGradePoint, setCumulativeGradePoint] = useState(0)
+  const [errMsg, setErrMsg] = useState("")
 
   // console.log(currentGP, numberOfSemesters)
 
@@ -61,6 +62,9 @@ function App() {
       ...prevInput,
       [e.target.name]: e.target.value,
     }));
+    if(errMsg){
+      setErrMsg("")
+    }
   };
 
   const handleAddGrade = (e) => {
@@ -78,6 +82,7 @@ function App() {
       gradeInput.unit === "" ||
       gradeInput.score === ""
     ) {
+      setErrMsg("input fields cannot be empty")
       return;
     }
     dispatch({
@@ -136,6 +141,7 @@ function App() {
         <span>Fresh student? Enter 0 for both</span>
         <h2> Enter Grades</h2>
         <div className="input-container">
+          <span className="error-alert"> { errMsg? errMsg : ""} </span>
           <input
             ref={courseRef}
             type="text"

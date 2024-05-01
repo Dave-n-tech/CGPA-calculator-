@@ -34,6 +34,11 @@ form{
     padding: 5px;
 }
 
+.error-alert{
+    color: red;
+    text-align: center;
+}
+
 .input-container{
     width: 100%;
     display: flex;
@@ -44,6 +49,7 @@ input{
     width: 33.3%;
     height: 30px;
     background-color: rgb(231, 233, 235);
+    color: black;
     border: none;
     padding:5px 15px;
 }

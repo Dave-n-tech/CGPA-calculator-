@@ -11,14 +11,14 @@ export default function CurrentGrade({CgpaRef, semestersRef, setCurrentGP, setNu
         type="text"
         placeholder="current CGPA"
         name="currentCGPA"
-        onChange={(e) => setCurrentGP(e.target.value)}
+        onChange={(e) => setCurrentGP(e.target.value? e.target.value : 0)}
       />
       <input
         ref={semestersRef}
         type="text"
         placeholder="no. of semesters taken"
         name="numberOfSemesters"
-        onChange={(e) => setNumberOfSemesters(e.target.value)}
+        onChange={(e) => setNumberOfSemesters(e.target.value? e.target.value : 0)}
       />
     </div>
   );
